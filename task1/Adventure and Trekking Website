@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adventure Trails</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f2;
+    color: #26332a;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #18392b;
+    padding: 16px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #f5c542;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #f5c542;
+}
+
+.hero {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    padding: 60px 8%;
+    color: white;
+    background:
+        linear-gradient(rgba(0,40,25,.55),rgba(0,20,10,.75)),
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=80")
+        center/cover;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero h1 {
+    font-size: 65px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 21px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background: #f5c542;
+    color: #18392b;
+    padding: 14px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: white;
+}
+
+section {
+    padding: 70px 7%;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.title h2 {
+    font-size: 38px;
+    color: #18392b;
+}
+
+.title p {
+    color: #66736a;
+    margin-top: 8px;
+}
+
+.route-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.route-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,.1);
+}
+
+.route-image {
+    height: 230px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.route-1 {
+    background-image: url("https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=900&q=80");
+}
+
+.route-2 {
+    background-image: url("https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=900&q=80");
+}
+
+.route-3 {
+    background-image: url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80");
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent,rgba(0,0,0,.7));
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    color: white;
+}
+
+.overlay h3 {
+    font-size: 25px;
+}
+
+.route-content {
+    padding: 25px;
+}
+
+.route-content p {
+    color: #66736a;
+    margin: 12px 0;
+}
+
+.tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #e7f1e8;
+    color: #21613d;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.difficulty {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.schedule {
+    background: #eaf2ed;
+}
+
+.schedule-table {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+th, td {
+    padding: 17px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #18392b;
+    color: white;
+}
+
+tr:hover {
+    background: #f4f8f4;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.info-panel {
+    padding: 30px;
+    border-radius: 16px;
+    color: white;
+}
+
+.info-panel h3 {
+    font-size: 24px;
+    margin-bottom: 18px;
+}
+
+.info-panel ul {
+    padding-left: 20px;
+}
+
+.info-panel li {
+    margin: 12px 0;
+}
+
+.equipment {
+    background: #245c43;
+}
+
+.safety {
+    background: #a94a2b;
+}
+
+.tips {
+    background: #695b20;
+}
+
+.package-section {
+    background: #18392b;
+    color: white;
+}
+
+.package-section .title h2 {
+    color: white;
+}
+
+.package-section .title p {
+    color: #d5ded8;
+}
+
+.package-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.package {
+    background: white;
+    color: #26332a;
+    padding: 35px 25px;
+    border-radius: 18px;
+    text-align: center;
+    position: relative;
+}
+
+.package.featured {
+    border: 4px solid #f5c542;
+    transform: translateY(-10px);
+}
+
+.package h3 {
+    font-size: 25px;
+    color: #18392b;
+}
+
+.price {
+    font-size: 42px;
+    font-weight: bold;
+    color: #d68b00;
+    margin: 15px 0;
+}
+
+.package ul {
+    list-style: none;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.package li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.package .btn {
+    width: 100%;
+}
+
+.contact {
+    text-align: center;
+    background: #eef4ee;
+}
+
+.contact-box {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.contact-box p {
+    margin: 10px;
+}
+
+footer {
+    background: #0e251b;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+footer span {
+    color: #f5c542;
+}
+
+@media(max-width:1000px) {
+    .route-grid,
+    .info-grid,
+    .package-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .hero h1 {
+        font-size: 50px;
+    }
+}
+
+@media(max-width:700px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero {
+        min-height: 500px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .route-grid,
+    .info-grid,
+    .package-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .package.featured {
+        transform: none;
+    }
+
+    section {
+        padding: 50px 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">🏔 ADVENTURE TRAILS</div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#routes">Routes</a></li>
+        <li><a href="#schedule">Trips</a></li>
+        <li><a href="#equipment">Equipment</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Explore Beyond Limits</h1>
+        <p>
+            Discover breathtaking mountains, thrilling trekking routes,
+            peaceful campsites and unforgettable outdoor adventures.
+        </p>
+        <a href="#routes" class="btn">Explore Treks</a>
+    </div>
+</section>
+
+<section id="routes">
+
+    <div class="title">
+        <h2>Popular Trekking Routes</h2>
+        <p>Choose your next adventure based on your experience level.</p>
+    </div>
+
+    <div class="route-grid">
+
+        <div class="route-card">
+            <div class="route-image route-1">
+                <div class="overlay">
+                    <h3>Himalayan Ridge</h3>
+                </div>
+            </div>
+
+            <div class="route-content">
+                <p>Experience stunning mountain views and beautiful forest trails.</p>
+
+                <div class="tags">
+                    <span class="tag">8 Days</span>
+                    <span class="tag">42 KM</span>
+                    <span class="tag difficulty">Hard</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="route-card">
+            <div class="route-image route-2">
+                <div class="overlay">
+                    <h3>Green Valley Trail</h3>
+                </div>
+            </div>
+
+            <div class="route-content">
+                <p>A refreshing trek through green valleys, waterfalls and villages.</p>
+
+                <div class="tags">
+                    <span class="tag">5 Days</span>
+                    <span class="tag">28 KM</span>
+                    <span class="tag">Medium</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="route-card">
+            <div class="route-image route-3">
+                <div class="overlay">
+                    <h3>Mountain Peak</h3>
+                </div>
+            </div>
+
+            <div class="route-content">
+                <p>A challenging high-altitude adventure for experienced trekkers.</p>
+
+                <div class="tags">
+                    <span class="tag">10 Days</span>
+                    <span class="tag">65 KM</span>
+                    <span class="tag difficulty">Expert</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="schedule" id="schedule">
+
+    <div class="title">
+        <h2>Trip Schedule</h2>
+        <p>Upcoming trekking and camping departures.</p>
+    </div>
+
+    <div class="schedule-table">
+
+        <table>
+            <tr>
+                <th>Trip</th>
+                <th>Departure</th>
+                <th>Duration</th>
+                <th>Difficulty</th>
+                <th>Seats</th>
+            </tr>
+
+            <tr>
+                <td>Himalayan Ridge</td>
+                <td>15 Nov 2026</td>
+                <td>8 Days</td>
+                <td>Hard</td>
+                <td>12</td>
+            </tr>
+
+            <tr>
+                <td>Green Valley Trail</td>
+                <td>22 Nov 2026</td>
+                <td>5 Days</td>
+                <td>Medium</td>
+                <td>18</td>
+            </tr>
+
+            <tr>
+                <td>Mountain Peak</td>
+                <td>05 Dec 2026</td>
+                <td>10 Days</td>
+                <td>Expert</td>
+                <td>8</td>
+            </tr>
+
+            <tr>
+                <td>Forest Camping</td>
+                <td>12 Dec 2026</td>
+                <td>3 Days</td>
+                <td>Easy</td>
+                <td>25</td>
+            </tr>
+        </table>
+
+    </div>
+</section>
+
+<section id="equipment">
+
+    <div class="title">
+        <h2>Essential Information</h2>
+        <p>Prepare properly before starting your adventure.</p>
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info-panel equipment">
+            <h3>🎒 Equipment Checklist</h3>
+
+            <ul>
+                <li>Trekking shoes</li>
+                <li>Backpack</li>
+                <li>Water bottle</li>
+                <li>First-aid kit</li>
+                <li>Flashlight</li>
+                <li>Rain jacket</li>
+                <li>Warm clothing</li>
+                <li>Navigation tools</li>
+            </ul>
+        </div>
+
+        <div class="info-panel safety">
+            <h3>🛡 Safety Guidelines</h3>
+
+            <ul>
+                <li>Follow the trek leader.</li>
+                <li>Stay with your group.</li>
+                <li>Carry enough drinking water.</li>
+                <li>Check weather conditions.</li>
+                <li>Do not leave marked trails.</li>
+                <li>Keep emergency contacts available.</li>
+                <li>Respect wildlife.</li>
+                <li>Never trek alone.</li>
+            </ul>
+        </div>
+
+        <div class="info-panel tips">
+            <h3>🌲 Trekking Tips</h3>
+
+            <ul>
+                <li>Start training before the trip.</li>
+                <li>Pack only essential items.</li>
+                <li>Wear comfortable clothing.</li>
+                <li>Stay hydrated.</li>
+                <li>Maintain a steady pace.</li>
+                <li>Protect the environment.</li>
+                <li>Carry reusable bottles.</li>
+                <li>Keep emergency supplies.</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<section class="package-section" id="packages">
+
+    <div class="title">
+        <h2>Trekking Packages</h2>
+        <p>Choose the adventure package that suits you.</p>
+    </div>
+
+    <div class="package-grid">
+
+        <div class="package">
+            <h3>Explorer</h3>
+            <div class="price">₹7,999</div>
+
+            <ul>
+                <li>3 Days / 2 Nights</li>
+                <li>Camping Accommodation</li>
+                <li>Professional Guide</li>
+                <li>Breakfast & Dinner</li>
+                <li>Basic First Aid</li>
+            </ul>
+
+            <a href="#contact" class="btn">Book Now</a>
+        </div>
+
+        <div class="package featured">
+            <h3>Adventurer</h3>
+            <div class="price">₹14,999</div>
+
+            <ul>
+                <li>5 Days / 4 Nights</li>
+                <li>Premium Camping</li>
+                <li>Expert Trek Leader</li>
+                <li>All Meals Included</li>
+                <li>Safety Equipment</li>
+                <li>Transportation</li>
+            </ul>
+
+            <a href="#contact" class="btn">Book Now</a>
+        </div>
+
+        <div class="package">
+            <h3>Extreme</h3>
+            <div class="price">₹24,999</div>
+
+            <ul>
+                <li>10 Days / 9 Nights</li>
+                <li>High Altitude Camping</li>
+                <li>Expert Mountain Guide</li>
+                <li>All Meals Included</li>
+                <li>Complete Safety Gear</li>
+                <li>Transportation</li>
+            </ul>
+
+            <a href="#contact" class="btn">Book Now</a>
+        </div>
+
+    </div>
+</section>
+
+<section id="contact" class="contact">
+
+    <div class="title">
+        <h2>Start Your Adventure</h2>
+        <p>Contact our team to reserve your trekking experience.</p>
+    </div>
+
+    <div class="contact-box">
+        <p>📧 Email: adventuretrails@example.com</p>
+        <p>📞 Phone: +91 98765 43210</p>
+        <p>📍 Adventure Trails Office, New Delhi</p>
+        <p>🕐 Available: Monday - Saturday, 9:00 AM - 6:00 PM</p>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 <span>Adventure Trails</span> | Explore. Trek. Discover.</p>
+    <p>Designed using HTML & CSS only</p>
+</footer>
+
+</body>
+</html>
