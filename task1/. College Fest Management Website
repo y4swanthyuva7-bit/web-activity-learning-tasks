@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechnoFest 2026</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+    line-height: 1.6;
+}
+
+nav {
+    background: #111827;
+    color: white;
+    padding: 15px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #38bdf8;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #38bdf8;
+}
+
+.hero {
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 50px 20px;
+    background: linear-gradient(rgba(17,24,39,.75),rgba(30,41,59,.85)),
+                linear-gradient(135deg,#2563eb,#7c3aed);
+}
+
+.hero h1 {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+.date {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 28px;
+    background: #38bdf8;
+    color: #111827;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: white;
+}
+
+section {
+    padding: 70px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    font-size: 36px;
+    color: #111827;
+}
+
+.section-title p {
+    color: #64748b;
+    margin-top: 8px;
+}
+
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.event-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    transition: .3s;
+    border-top: 5px solid #2563eb;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+}
+
+.event-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.event-card h3 {
+    color: #1e3a8a;
+    margin-bottom: 10px;
+}
+
+.event-card p {
+    color: #64748b;
+    margin-bottom: 15px;
+}
+
+.event-info {
+    font-size: 14px;
+    color: #475569;
+}
+
+.technical {
+    background: #eff6ff;
+}
+
+.cultural {
+    background: #fff7ed;
+}
+
+.cultural .event-card {
+    border-top-color: #f97316;
+}
+
+.workshops {
+    background: #f0fdf4;
+}
+
+.workshops .event-card {
+    border-top-color: #16a34a;
+}
+
+.schedule-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    background: #1e3a8a;
+    color: white;
+}
+
+tr:hover {
+    background: #f8fafc;
+}
+
+.coordinator-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 25px;
+}
+
+.coordinator {
+    background: white;
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    border-radius: 50%;
+    background: #dbeafe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.coordinator h3 {
+    color: #1e3a8a;
+}
+
+.coordinator p {
+    color: #64748b;
+}
+
+.rules {
+    background: #111827;
+    color: white;
+}
+
+.rules .section-title h2,
+.rules .section-title p {
+    color: white;
+}
+
+.rules-list {
+    max-width: 850px;
+    margin: auto;
+    background: #1f2937;
+    padding: 35px;
+    border-radius: 15px;
+}
+
+.rules-list li {
+    margin: 15px 0;
+}
+
+.registration {
+    background: #eef2ff;
+}
+
+form {
+    max-width: 750px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.08);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+    color: #334155;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #1d4ed8;
+}
+
+.contact {
+    text-align: center;
+    background: #e0f2fe;
+}
+
+.contact p {
+    margin: 10px;
+}
+
+footer {
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+footer span {
+    color: #38bdf8;
+}
+
+@media (max-width:1000px) {
+    .event-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .coordinator-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .hero h1 {
+        font-size: 48px;
+    }
+}
+
+@media (max-width:700px) {
+    nav {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero {
+        min-height: 450px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .event-grid,
+    .coordinator-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 50px 5%;
+    }
+
+    .section-title h2 {
+        font-size: 30px;
+    }
+
+    form {
+        padding: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">TECHNOFEST 2026</div>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#technical">Technical</a></li>
+        <li><a href="#cultural">Cultural</a></li>
+        <li><a href="#workshops">Workshops</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#register">Register</a></li>
+    </ul>
+</nav>
+
+<section class="hero" id="home">
+    <div>
+        <h1>TECHNOFEST 2026</h1>
+        <p>Innovation • Creativity • Culture • Technology</p>
+        <div class="date">November 20 - 22, 2026</div>
+        <a href="#register" class="btn">Register Now</a>
+    </div>
+</section>
+
+<section class="technical" id="technical">
+    <div class="section-title">
+        <h2>💻 Technical Events</h2>
+        <p>Show your technical skills and innovative ideas.</p>
+    </div>
+
+    <div class="event-grid">
+
+        <div class="event-card">
+            <div class="event-icon">🤖</div>
+            <h3>Code Combat</h3>
+            <p>Test your programming skills through exciting coding challenges.</p>
+            <div class="event-info">10:00 AM - 12:00 PM<br>Computer Lab 1<br>Coordinator: Rahul</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">🧠</div>
+            <h3>Tech Quiz</h3>
+            <p>Compete with other teams and prove your technology knowledge.</p>
+            <div class="event-info">11:00 AM - 12:00 PM<br>Seminar Hall<br>Coordinator: Priya</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">💡</div>
+            <h3>Project Expo</h3>
+            <p>Present your innovative projects to students and judges.</p>
+            <div class="event-info">1:00 PM - 4:00 PM<br>Main Block<br>Coordinator: Kiran</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">🌐</div>
+            <h3>Web Design</h3>
+            <p>Create a creative and responsive website within the given time.</p>
+            <div class="event-info">2:00 PM - 4:00 PM<br>Computer Lab 2<br>Coordinator: Anil</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">🔐</div>
+            <h3>Cyber Challenge</h3>
+            <p>Explore cybersecurity concepts through interesting challenges.</p>
+            <div class="event-info">10:00 AM - 1:00 PM<br>Lab 3<br>Coordinator: Naveen</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">📊</div>
+            <h3>Data Science</h3>
+            <p>Solve real-world problems using data analysis techniques.</p>
+            <div class="event-info">2:00 PM - 5:00 PM<br>AI Lab<br>Coordinator: Sneha</div>
+        </div>
+
+    </div>
+</section>
+
+<section class="cultural" id="cultural">
+    <div class="section-title">
+        <h2>🎭 Cultural Competitions</h2>
+        <p>Celebrate talent, creativity and culture.</p>
+    </div>
+
+    <div class="event-grid">
+
+        <div class="event-card">
+            <div class="event-icon">💃</div>
+            <h3>Dance Competition</h3>
+            <p>Show your best dance performance on the festival stage.</p>
+            <div class="event-info">5:00 PM - 7:00 PM<br>Open Auditorium</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">🎤</div>
+            <h3>Singing Competition</h3>
+            <p>Let your voice shine in our college singing competition.</p>
+            <div class="event-info">4:00 PM - 6:00 PM<br>Main Stage</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">🎨</div>
+            <h3>Painting</h3>
+            <p>Express your imagination through colors and creativity.</p>
+            <div class="event-info">10:00 AM - 1:00 PM<br>Art Room</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">🎬</div>
+            <h3>Short Film</h3>
+            <p>Present an original short film created by your team.</p>
+            <div class="event-info">3:00 PM - 5:00 PM<br>Auditorium</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">🕺</div>
+            <h3>Fashion Show</h3>
+            <p>Walk the ramp and showcase your unique style.</p>
+            <div class="event-info">6:00 PM - 8:00 PM<br>Main Stage</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">🎭</div>
+            <h3>Drama</h3>
+            <p>Perform an engaging drama and entertain the audience.</p>
+            <div class="event-info">5:00 PM - 7:00 PM<br>Auditorium</div>
+        </div>
+
+    </div>
+</section>
+
+<section class="workshops" id="workshops">
+    <div class="section-title">
+        <h2>🛠 Workshops</h2>
+        <p>Learn new skills from experienced professionals.</p>
+    </div>
+
+    <div class="event-grid">
+
+        <div class="event-card">
+            <div class="event-icon">🤖</div>
+            <h3>Artificial Intelligence</h3>
+            <p>Introduction to AI, machine learning and modern applications.</p>
+            <div class="event-info">November 20<br>10:00 AM</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">🐍</div>
+            <h3>Python Programming</h3>
+            <p>Learn Python programming from basics to practical applications.</p>
+            <div class="event-info">November 21<br>10:00 AM</div>
+        </div>
+
+        <div class="event-card">
+            <div class="event-icon">☁️</div>
+            <h3>Cloud Computing</h3>
+            <p>Understand cloud technologies and their real-world applications.</p>
+            <div class="event-info">November 22<br>11:00 AM</div>
+        </div>
+
+    </div>
+</section>
+
+<section id="schedule">
+    <div class="section-title">
+        <h2>📅 Festival Schedule</h2>
+        <p>Plan your festival experience.</p>
+    </div>
+
+    <div class="schedule-container">
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Event</th>
+                <th>Venue</th>
+            </tr>
+            <tr>
+                <td>Nov 20</td>
+                <td>09:00 AM</td>
+                <td>Opening Ceremony</td>
+                <td>Main Auditorium</td>
+            </tr>
+            <tr>
+                <td>Nov 20</td>
+                <td>10:00 AM</td>
+                <td>Code Combat</td>
+                <td>Computer Lab</td>
+            </tr>
+            <tr>
+                <td>Nov 20</td>
+                <td>05:00 PM</td>
+                <td>Dance Competition</td>
+                <td>Main Stage</td>
+            </tr>
+            <tr>
+                <td>Nov 21</td>
+                <td>10:00 AM</td>
+                <td>Python Workshop</td>
+                <td>Seminar Hall</td>
+            </tr>
+            <tr>
+                <td>Nov 21</td>
+                <td>01:00 PM</td>
+                <td>Project Expo</td>
+                <td>Main Block</td>
+            </tr>
+            <tr>
+                <td>Nov 21</td>
+                <td>06:00 PM</td>
+                <td>Fashion Show</td>
+                <td>Main Stage</td>
+            </tr>
+            <tr>
+                <td>Nov 22</td>
+                <td>10:00 AM</td>
+                <td>Tech Quiz</td>
+                <td>Seminar Hall</td>
+            </tr>
+            <tr>
+                <td>Nov 22</td>
+                <td>06:00 PM</td>
+                <td>Grand Finale</td>
+                <td>Open Auditorium</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section>
+    <div class="section-title">
+        <h2>👥 Event Coordinators</h2>
+        <p>Contact our festival team for assistance.</p>
+    </div>
+
+    <div class="coordinator-grid">
+
+        <div class="coordinator">
+            <div class="avatar">👨‍💼</div>
+            <h3>Rahul Kumar</h3>
+            <p>Technical Events</p>
+            <p>98765 43210</p>
+        </div>
+
+        <div class="coordinator">
+            <div class="avatar">👩‍💼</div>
+            <h3>Priya Sharma</h3>
+            <p>Cultural Events</p>
+            <p>98765 43211</p>
+        </div>
+
+        <div class="coordinator">
+            <div class="avatar">👨‍💻</div>
+            <h3>Kiran Reddy</h3>
+            <p>Workshops</p>
+            <p>98765 43212</p>
+        </div>
+
+        <div class="coordinator">
+            <div class="avatar">👩‍💻</div>
+            <h3>Sneha Rao</h3>
+            <p>Registrations</p>
+            <p>98765 43213</p>
+        </div>
+
+    </div>
+</section>
+
+<section class="rules">
+    <div class="section-title">
+        <h2>📜 Festival Rules</h2>
+        <p>Please read the rules before registering.</p>
+    </div>
+
+    <div class="rules-list">
+        <ol>
+            <li>Participants must carry a valid college ID card.</li>
+            <li>Participants should report 30 minutes before the event.</li>
+            <li>Registration must be completed before the deadline.</li>
+            <li>Participants must follow coordinator instructions.</li>
+            <li>Any misconduct will lead to disqualification.</li>
+            <li>Teams must follow the participant limit.</li>
+            <li>Judges' decisions will be final.</li>
+            <li>Participants are responsible for their belongings.</li>
+        </ol>
+    </div>
+</section>
+
+<section class="registration" id="register">
+    <div class="section-title">
+        <h2>📝 Event Registration</h2>
+        <p>Register for your favorite festival event.</p>
+    </div>
+
+    <form>
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Roll Number</label>
+            <input type="text" placeholder="Enter your roll number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="Enter your phone number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Department</label>
+            <select>
+                <option>Select Department</option>
+                <option>CSE</option>
+                <option>ECE</option>
+                <option>EEE</option>
+                <option>Mechanical</option>
+                <option>Civil</option>
+                <option>IT</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Select Event</label>
+            <select>
+                <option>Select Event</option>
+                <option>Code Combat</option>
+                <option>Tech Quiz</option>
+                <option>Project Expo</option>
+                <option>Web Design</option>
+                <option>Dance Competition</option>
+                <option>Singing Competition</option>
+                <option>Painting</option>
+                <option>Fashion Show</option>
+                <option>Python Workshop</option>
+                <option>AI Workshop</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Additional Information</label>
+            <textarea placeholder="Enter additional information"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">
+            Submit Registration
+        </button>
+
+    </form>
+</section>
+
+<section class="contact">
+    <div class="section-title">
+        <h2>📞 Contact Us</h2>
+        <p>Have questions? Contact the festival team.</p>
+    </div>
+
+    <p><strong>Venue:</strong> NRI University Campus</p>
+    <p><strong>Email:</strong> technofest@example.com</p>
+    <p><strong>Phone:</strong> +91 98765 43210</p>
+</section>
+
+<footer>
+    <p>© 2026 <span>TECHNOFEST</span> | College Annual Festival</p>
+    <p>Designed using HTML & CSS only</p>
+</footer>
+
+</body>
+</html>
